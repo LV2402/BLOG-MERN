@@ -46,10 +46,14 @@ function Header() {
           <FaMoon className="text-xl" />
         </button>
         <Link to="/sign-in">
-          <button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg">
+          <button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg border border-white hover:scale-105 transition transform">
             Sign In
           </button>
         </Link>
+
+
+
+
 
         {/* Mobile Menu Button (Only visible when search bar is hidden) */}
         <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden">
