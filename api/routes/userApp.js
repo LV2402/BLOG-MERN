@@ -50,13 +50,13 @@ userApp.post("/signin", async (req, res, next) => {
     // Find user by email
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      return next(errorHandler(404, "User not found"));
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
     // Validate password
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) {
-      return next(errorHandler(400, "Invalid password"));
+      return res.status(400).json({ success: false, message: "Invalid password" });
     }
 
     // Generate JWT token
@@ -68,13 +68,14 @@ userApp.post("/signin", async (req, res, next) => {
     const { password: pass, ...rest } = validUser._doc;
 
     res
-      .status(200)
-      .cookie("access_token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-      })
-      .json(rest);
+    .status(200)
+    .cookie("access_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    })
+    .json({ success: true, ...rest });
+  
   } catch (error) {
     next(error);
   }

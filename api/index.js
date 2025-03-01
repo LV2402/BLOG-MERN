@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express(); // ✅ Initialize 'app' before using it
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Allow requests from frontend
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 
 // Import Routes
