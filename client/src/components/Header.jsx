@@ -11,7 +11,7 @@ function Header() {
   const isActive = (path) => (location.pathname === path ? "text-indigo-500 font-semibold" : "text-gray-700");
 
   return (
-    <header className="border-b-2 px-4 py-3 flex justify-between items-center">
+    <header className="border-b-2 px-4 py-3 flex justify-between items-center bg-gray-700 text-white">
       {/* Logo */}
       <Link to="/" className="text-sm sm:text-xl font-semibold dark:text-white">
         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
@@ -21,7 +21,7 @@ function Header() {
       </Link>
 
       {/* Center Content - Search bar OR Links */}
-      <div className="hidden lg:flex items-center gap-6">
+      <div className="hidden lg:flex items-center gap-6 text-white">
         {/* Search Bar with Icon Inside */}
         <div className="relative">
           <AiOutlineSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
