@@ -6,11 +6,11 @@ const bcryptjs = require("bcryptjs")
 
 
 // Define routes
-userApp.get("/test", async (req, res) => {
+userApp.get("/test", async (req, res,next) => {
     res.send({ message: "test route" });
 });
 
-userApp.post("/signup",async(req,res)=>{
+userApp.post("/signup",async(req,res,next)=>{
     const { username, email, password } = req.body;
     
     const hashedPassword = bcryptjs.hashSync(password,10)
@@ -23,7 +23,7 @@ userApp.post("/signup",async(req,res)=>{
         await newUser.save();
         res.json('Signup successful');
       } catch (error) {
-        res.send({message:"err in user some shit",payload:error.message})
+        next(error)
     }
 })
 
