@@ -114,7 +114,7 @@ userApp.post("/google", async (req, res, next) => {
       password: hashedPassword,
       profilePicture: googlePhotoUrl,
     });
-    console.log(newUser)
+    // console.log(newUser)
     await newUser.save();
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
