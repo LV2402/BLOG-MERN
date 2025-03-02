@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { FaMoon } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme } from '../redux/theme/themeSlice';
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,8 +12,10 @@ function Header() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
 
-  const isActive = (path) => (location.pathname === path ? "text-indigo-400 font-semibold" : "text-gray-300");
+  const isActive = (path) =>
+    location.pathname === path ? 'text-indigo-400 font-semibold' : 'text-gray-300';
 
   return (
     <header className="bg-gray-800 text-white shadow-md px-6 py-3 flex justify-between items-center">
@@ -23,6 +26,19 @@ function Header() {
         </span>
         <span className="hidden sm:inline">Blog</span>
       </Link>
+
+      {/* Desktop Navigation */}
+      <nav className="hidden lg:flex items-center gap-6">
+        <Link to="/" className={`text-lg ${isActive('/')}`}>
+          Home
+        </Link>
+        <Link to="/about" className={`text-lg ${isActive('/about')}`}>
+          About
+        </Link>
+        <Link to="/projects" className={`text-lg ${isActive('/projects')}`}>
+          Projects
+        </Link>
+      </nav>
 
       {/* Center Search Bar */}
       <div className="hidden lg:flex items-center w-1/3 relative">
@@ -36,8 +52,8 @@ function Header() {
 
       {/* Navigation & User Actions */}
       <div className="flex items-center gap-4 relative">
-        <button className="hidden sm:inline">
-          <FaMoon className="text-xl" />
+        <button className="hidden sm:inline" onClick={() => dispatch(toggleTheme())}>
+          {theme === 'light' ? <FaSun /> : <FaMoon />}
         </button>
 
         {currentUser ? (
@@ -54,7 +70,9 @@ function Header() {
                 <p className="px-4 py-2 text-sm font-semibold">@{currentUser.username}</p>
                 <p className="px-4 py-2 text-sm">{currentUser.email}</p>
                 <hr className="border-gray-300" />
-                <Link to="/dashboard?tab=profile" className="block px-4 py-2 hover:bg-gray-200">Dashboard</Link>
+                <Link to="/dashboard?tab=profile" className="block px-4 py-2 hover:bg-gray-200">
+                  Dashboard
+                </Link>
                 <button
                   onClick={() => {
                     dispatch(signOut());
@@ -84,9 +102,15 @@ function Header() {
       {/* Mobile Navigation */}
       {isOpen && (
         <nav className="absolute top-16 left-0 w-full bg-gray-800 shadow-md flex flex-col items-center gap-3 py-4 lg:hidden">
-          <Link to="/" className={`text-lg ${isActive("/")}`} onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/about" className={`text-lg ${isActive("/about")}`} onClick={() => setIsOpen(false)}>About</Link>
-          <Link to="/projects" className={`text-lg ${isActive("/projects")}`} onClick={() => setIsOpen(false)}>Projects</Link>
+          <Link to="/" className={`text-lg ${isActive('/')}`} onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link to="/about" className={`text-lg ${isActive('/about')}`} onClick={() => setIsOpen(false)}>
+            About
+          </Link>
+          <Link to="/projects" className={`text-lg ${isActive('/projects')}`} onClick={() => setIsOpen(false)}>
+            Projects
+          </Link>
         </nav>
       )}
     </header>

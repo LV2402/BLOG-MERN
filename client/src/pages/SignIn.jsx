@@ -54,9 +54,10 @@ function SignIn() {
             </span>{' '}
             Blog
           </Link>
-          <p className="mt-4 text-gray-600 dark:text-gray-300">
-            Join us today and share your thoughts with the world!
-          </p>
+          <p className="mt-4 text-gray-400 dark:text-white">
+  Join us today and share your thoughts with the world!
+</p>
+
         </div>
 
         {/* Right Section - Sign Up Form */}
