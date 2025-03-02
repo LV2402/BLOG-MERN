@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 function SignIn() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -100,6 +101,7 @@ function SignIn() {
                 'Sign In'
               )}
             </button>
+            <OAuth/>
           </form>
 
           <p className="text-center text-gray-600 dark:text-gray-300 mt-4">

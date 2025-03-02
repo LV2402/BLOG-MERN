@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 function SignUp() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -112,6 +113,7 @@ function SignUp() {
                 'Sign Up'
               )}
             </button>
+            <OAuth/>
           </form>
 
           <p className="text-center text-gray-600 dark:text-gray-300 mt-4">
