@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
-import { useState, useRef } from "react";
 
 function DashProfile() {
   const { currentUser, loading } = useSelector((state) => state.user);
-  const [imageFile, setImageFile] = useState(null);
-  const filePickerRef = useRef();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900 p-6">
@@ -12,26 +9,6 @@ function DashProfile() {
         <h1 className="text-center text-3xl font-semibold text-gray-800 mb-6">
           Profile
         </h1>
-
-        {/* Profile Picture Input */}
-        <div className="flex flex-col items-center">
-          <input
-            type="file"
-            hidden
-            ref={filePickerRef}
-            onChange={(e) => setImageFile(e.target.files[0])}
-          />
-          <div
-            className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-300 cursor-pointer"
-            onClick={() => filePickerRef.current.click()}
-          >
-            <img
-              src={imageFile ? URL.createObjectURL(imageFile) : currentUser?.profilePicture}
-              alt="User"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
 
         {/* Form */}
         <form className="mt-6 space-y-4">
